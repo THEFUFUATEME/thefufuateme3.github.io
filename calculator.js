@@ -2,25 +2,37 @@ let displayValue = '';
 
 function appendToDisplay(value) {
     displayValue += value;
-    document.getElementById('display').value = displayValue;
-}
-
-function appendOperation(operation) {
-    displayValue += operation;
-    document.getElementById('display').value = displayValue;
+    updateDisplay();
 }
 
 function clearDisplay() {
     displayValue = '';
-    document.getElementById('display').value = displayValue;
+    updateDisplay();
 }
 
 function calculate() {
     try {
         const result = eval(displayValue);
-        document.getElementById('display').value = result;
-        displayValue = result;
+        displayValue = result.toString();
+        updateDisplay();
     } catch (error) {
-        document.getElementById('display').value = 'Error';
+        alert('Invalid input');
     }
 }
+
+function updateDisplay() {
+    document.getElementById('display').value = displayValue;
+}
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    if (!isNaN(key) || key === '.' || key === '+' || key === '-' || key === '*' || key === '/' || key === '=') {
+        if (key === '=' || key === 'Enter') {
+            calculate();
+        } else if (key === 'Escape' || key === 'Delete') {
+            clearDisplay();
+        } else {
+            appendToDisplay(key);
+        }
+    }
+});
