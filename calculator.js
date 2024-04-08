@@ -29,7 +29,7 @@ document.addEventListener('keydown', function(event) {
     if (!isNaN(key) || key === '.' || key === '+' || key === '-' || key === '*' || key === '/' || key === '=') {
         if (key === '=' || key === 'Enter') {
             calculate();
-        } else if (key === 'Escape' || key === 'Delete') {
+        } else if (key === 'Esc' || key === 'Delete') {
             clearDisplay();
         } else {
             appendToDisplay(key);
